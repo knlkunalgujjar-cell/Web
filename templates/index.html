@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hacker Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Loading Screen -->
+<div id="loader">
+    <div class="loader-box">
+        <h2>INITIALIZING SYSTEM...</h2>
+
+        <div class="loader-bar">
+            <div class="loader-fill" id="loaderFill"></div>
+        </div>
+
+        <p id="loaderText">Loading Modules...</p>
+    </div>
+</div>
+
+<!-- Matrix Background -->
+<canvas id="matrix"></canvas>
+
+<div class="container">
+
+    <!-- Top Bar with Prominent Instagram Promotion -->
+    <div class="topbar">
+
+        <div class="logo">
+            💀 LIKE BY @mhanuj1k
+        </div>
+
+        <div class="insta-promo" style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; padding: 5px 12px; border-radius: 20px;">
+            <a href="https://www.instagram.com/mhanuj1k?igsh=MW5iaHEza2Y2bTB2Mw==" 
+               target="_blank" 
+               style="color: #00ff88; font-weight: bold; text-decoration: none; font-size: 13px;">
+               📸 Dev: @mhanuj1k
+            </a>
+        </div>
+
+        <div class="clock" id="clock">
+            00:00:00
+        </div>
+
+    </div>
+
+    <!-- Main Card -->
+    <div class="card">
+
+        <div class="status-dot"></div>
+
+        <h1 id="typing"></h1>
+
+        <p class="subtitle">
+            Secure Control Dashboard
+        </p>
+
+        <!-- Prominent Banner inside Card -->
+        <div style="background: #0f172a; border: 1px dashed #38bdf8; padding: 8px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
+            <span style="color: #cbd5e1; font-size: 12px;">Powered By:</span>
+            <a href="https://www.instagram.com/mhanuj1k?igsh=MW5iaHEza2Y2bTB2Mw==" 
+               target="_blank" 
+               style="color: #38bdf8; font-weight: bold; text-decoration: none; font-size: 13px; margin-left: 5px;">
+               ❤️ @mhanuj1k
+            </a>
+        </div>
+
+        <div class="terminal">
+
+            <div>> Connection Status :
+                <span class="green">ONLINE</span>
+            </div>
+
+            <div>> Security :
+                <span class="green">ACTIVE</span>
+            </div>
+
+            <div>> API :
+                <span class="green">CONNECTED</span>
+            </div>
+
+        </div>
+
+        <div class="input-box">
+
+            <label>UID</label>
+
+            <input
+                type="text"
+                id="uid"
+                placeholder="Enter Numeric UID">
+
+        </div>
+
+        <div class="input-box">
+
+            <label>SERVER</label>
+
+            <select id="server">
+
+                <option>IND</option>
+
+            </select>
+
+        </div>
+
+        <button id="sendBtn">
+            START PROCESS
+        </button>
+
+        <!-- Progress Bar & Status -->
+
+        <div class="progress" style="margin-top: 15px;">
+
+            <div class="progress-bar" id="bar"></div>
+
+        </div>
+
+        <div class="live-status" style="margin-top: 8px;">
+
+            <span id="statusText">
+                Waiting...
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>SERVER</h3>
+
+            <span id="serverStatus">
+                ONLINE
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>PING</h3>
+
+            <span id="ping">
+                0 ms
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>STATUS</h3>
+
+            <span id="system">
+                READY
+            </span>
+
+        </div>
+
+    </div>
+
+        <!-- Result (Perfect Aligned Layout) -->
+
+    <div class="result" id="result" style="display:none;">
+
+        <h2 class="result-title">SUCCESS RESULT</h2>
+
+        <div class="res-row">
+            <span class="res-label">👤 Player:</span>
+            <span class="res-value blue-text" id="name">-</span>
+        </div>
+
+        <div class="res-row">
+            <span class="res-label">🆔 UID:</span>
+            <span class="res-value" id="playeruid">-</span>
+        </div>
+
+        <div class="res-row">
+            <span class="res-label">🌍 Server:</span>
+            <span class="res-value" id="resServer">IND</span>
+        </div>
+
+        <div class="res-divider"></div>
+
+        <div class="res-row">
+            <span class="res-label">❤️ Before:</span>
+            <span class="res-value red-text" id="before">0</span>
+        </div>
+
+        <div class="res-row">
+            <span class="res-label">➕ Added:</span>
+            <span class="res-value green-text" id="added">+0</span>
+        </div>
+
+        <div class="res-row">
+            <span class="res-label">🔥 After:</span>
+            <span class="res-value cyan-text" id="after">0</span>
+        </div>
+
+        <div class="res-divider"></div>
+
+        <div class="res-row">
+            <span class="res-label">💎 Remaining:</span>
+            <span class="res-value yellow-text" id="remain">0</span>
+        </div>
+
+        <div class="res-divider"></div>
+
+        <p class="res-footer">
+            🤖 Powered By mhanuj1k ❤️
+        </p>
+
+    </div>
+
+    <!-- Fake Terminal -->
+
+    <div class="terminal-box">
+
+        <div class="terminal-header">
+            SYSTEM LOG
+        </div>
+
+        <div id="terminalLog">
+
+            <p>> Initializing...</p>
+
+            <p>> Waiting for user...</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+
+<footer>
+
+    <p>HACKER UI • VERSION 2.0 • POWERED BY @MHANUJ1K</p>
+
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
